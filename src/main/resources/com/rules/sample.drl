@@ -1,0 +1,15 @@
+package com.rules;
+
+import facts.TaxiRide;
+
+global facts.Fare rideFare;
+
+dialect "mvel"
+
+rule "Calculate Taxi Fee - Scenario 1"
+    when
+        taxiRideInstance: TaxiRide(nightSurcharge == false && distanceInMile < 10);
+    then
+        rideFare.setNightSurcharge(0);
+        rideFare.setRideFare(70);
+end
